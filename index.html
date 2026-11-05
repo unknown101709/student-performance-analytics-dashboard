@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Performance Analytics</title>
+    <meta name="description" content="Comprehensive academic performance tracking, marks & attendance analytics, rankings, and AI student risk assessments." />
+    <meta property="og:title" content="Student Performance Analytics" />
+    <meta property="og:description" content="Comprehensive academic performance tracking, marks & attendance analytics, rankings, and AI student risk assessments." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script>
+      // AI Studio environment constraint: HMR is disabled. Suppress Vite client WebSocket HMR errors.
+      (function() {
+        if (typeof window !== 'undefined') {
+          if (window.WebSocket) {
+            const OrigWebSocket = window.WebSocket;
+            window.WebSocket = function(url, protocols) {
+              if (
+                protocols === 'vite-hmr' ||
+                (typeof url === 'string' && (url.includes('@vite') || url.includes('vite-hmr')))
+              ) {
+                const dummy = {
+                  readyState: 3,
+                  send: function() {},
+                  close: function() {},
+                  addEventListener: function() {},
+                  removeEventListener: function() {},
+                  dispatchEvent: function() { return false; },
+                  onopen: null,
+                  onclose: null,
+                  onerror: null,
+                  onmessage: null
+                };
+                return dummy;
+              }
+              return new OrigWebSocket(url, protocols);
+            };
+          }
+
+          function isViteHmrError(err, filename, message) {
+            const text = (
+              String(message || '') + ' ' +
+              String(filename || '') + ' ' +
+              String(err?.message || '') + ' ' +
+              String(err?.stack || '') + ' ' +
+              String(err || '')
+            ).toLowerCase();
+            return (
+              text.includes('websocket') ||
+              text.includes('@vite/client') ||
+              text.includes('createwebsocket') ||
+              text.includes('vite-hmr')
+            );
+          }
+
+          window.addEventListener('error', function(e) {
+            if (isViteHmrError(e.error, e.filename, e.message)) {
+              e.preventDefault();
+              if (typeof e.stopImmediatePropagation === 'function') {
+                e.stopImmediatePropagation();
+              }
+              return true;
+            }
+          }, true);
+
+          window.addEventListener('unhandledrejection', function(e) {
+            if (isViteHmrError(e.reason)) {
+              e.preventDefault();
+              if (typeof e.stopImmediatePropagation === 'function') {
+                e.stopImmediatePropagation();
+              }
+              return true;
+            }
+          }, true);
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

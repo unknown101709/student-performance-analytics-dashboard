@@ -1,0 +1,6 @@
+{
+  "name": "Student Performance Analytics",
+  "description": "Comprehensive academic performance tracking, marks & attendance analytics, rankings, and AI student risk assessments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
